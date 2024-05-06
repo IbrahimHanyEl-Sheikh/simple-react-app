@@ -90,9 +90,12 @@ header {
 }
 
 .wrapper {
-    position: relative;
+    position: fixed; /* Change position to fixed */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the wrapper */
     width: 400px;
-    height: 440px;
+    height: auto; /* Change height to auto */
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .5);
     border-radius: 20px;
@@ -102,7 +105,7 @@ header {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    transform: scale(0);
+    /* transform: scale(0); Remove transform scale */
     transition: transform .5s ease , height .2s ease;
 }
 
