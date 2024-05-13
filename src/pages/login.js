@@ -39,7 +39,7 @@ const Login = ( {handletoggleregisterClick} ) => {
             <IonIcon icon={mail}></IonIcon>
           </span>
           <input type="text" name="username" onChange={handleChange} required />
-          <label>Email</label>
+          <label>Username</label>
         </div>
         <div className="input-box">
           <span className="icon">

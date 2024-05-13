@@ -22,6 +22,12 @@ function App() {
     setShowCourses(false);
   };
 
+  const handletoggleregisterClick = () => {
+    setShowLogin(false);
+    setShowRegister(true);
+    setShowCourses(true);
+  };
+
   const handleCoursesButtonClick = () => {
     setShowLogin(false);
     setShowRegister(false);
@@ -67,7 +73,7 @@ function App() {
           )}
           {showLogin && (
             <div className="form-box login">
-              <Login handletoggleregisterClick={handleCoursesButtonClick} />
+              <Login handletoggleregisterClick={handletoggleregisterClick} />
             </div>
           )}
           <span className="icon-close" onClick={handleCloseButtonClick}>
