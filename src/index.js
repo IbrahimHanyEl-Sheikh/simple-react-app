@@ -4,7 +4,7 @@ import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import RootLayout from './routes/RootLayout';
 import Login, {action as LoginAction} from './routes/Login';
-import Register from './routes/Register';
+import Register, {action as newUserAction} from './routes/Register';
 import Home, {loader as coursesLoader} from './routes/Home';
 
 
@@ -19,6 +19,7 @@ const router = createBrowserRouter([
     {
       path:'/register',
       element: <Register />, 
+      action: newUserAction
     },
     {
       path: '/home',

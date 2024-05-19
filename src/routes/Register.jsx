@@ -1,6 +1,6 @@
 import "../LoginRegister.css";
 import "../components/App.css";
-import {Link, Form} from 'react-router-dom';
+import {Link, Form, json, redirect} from 'react-router-dom';
 import { close, person, mail, lockClosed } from 'ionicons/icons/index.js';
 import { IonIcon } from '@ionic/react';
 // import axios from 'axios';
@@ -13,23 +13,23 @@ function Register() {
     //     password: ''
     //   });  
     
-    const handleRegister = async (e) => {
-        e.preventDefault();
-        window.location.href = '/home';
-        // try {
-        //     setFormData({
-        //         ...formData,
-        //         [e.target.name]: e.target.value
-        //       });
+    // const handleRegister = async (e) => {
+    //     e.preventDefault();
+    //     window.location.href = '/home';
+    //     // try {
+    //     //     setFormData({
+    //     //         ...formData,
+    //     //         [e.target.name]: e.target.value
+    //     //       });
             
-        //     console.log(formData);
-        //     const response = await axios.post('http://127.0.0.1:8000/api/register', JSON.stringify(formData));
-        //     console.log(response.data); // Handle successful registration
-        //     return redirect('/home');
-        // } catch (error) {
-        //   console.error('Registration failed:', error.message); // Handle registration error
-        // }
-      };
+    //     //     console.log(formData);
+    //     //     const response = await axios.post('http://127.0.0.1:8000/api/register', JSON.stringify(formData));
+    //     //     console.log(response.data); // Handle successful registration
+    //     //     return redirect('/home');
+    //     // } catch (error) {
+    //     //   console.error('Registration failed:', error.message); // Handle registration error
+    //     // }
+    //   };
 
       function handleCloseButtonClick() {
         window.location.href = '/';
@@ -68,7 +68,7 @@ function Register() {
                     <label><input type="checkbox" required></input>
                     I agree to the terms & conditions</label>
                 </div>
-                <button type="submit" className="btn" onClick={handleRegister}>Register</button>
+                <button type="submit" className="btn">Register</button>
                 <div className="login-register">
                     <p>Already have an account?<Link
                     to="/login"
@@ -82,3 +82,28 @@ function Register() {
 }
 
 export default Register;
+
+export async function action({request}) {
+    const data = await request.formData();
+    const eventData = {
+        username: data.get('username'),
+        email: data.get('email'),
+        password: data.get('password')
+    }
+    
+    const response = await fetch('http://localhost:8000/api/register/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData)
+    });
+    if (!response.ok) {
+        throw json(
+            {message: 'Could not register user...'},
+            {status: response.status}
+        );
+    } else {
+        window.location.href = '/home';
+    }
+}

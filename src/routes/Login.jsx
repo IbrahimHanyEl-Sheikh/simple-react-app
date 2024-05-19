@@ -1,7 +1,7 @@
 import "../LoginRegister.css";
 import "../components/App.css";
-import { Link, Form, redirect } from "react-router-dom";
-import { close, mail, lockClosed } from 'ionicons/icons/index.js';
+import { Link, Form, redirect, json } from "react-router-dom";
+import { close, person, lockClosed } from 'ionicons/icons/index.js';
 import { IonIcon } from '@ionic/react';
 
 function Login() {
@@ -18,16 +18,16 @@ function Login() {
             <Form method="post">
                 <div className="input-box">
                     <span className="icon">
-                        <IonIcon icon={mail}></IonIcon>
+                        <IonIcon icon={person}></IonIcon>
                     </span>
-                    <input type="email" required></input>
-                    <label>Email</label>
+                    <input type="text" name="username" required></input>
+                    <label>Username</label>
                 </div>
                 <div className="input-box">
                     <span className="icon">
                         <IonIcon icon={lockClosed}></IonIcon>
                         </span>
-                    <input type="password" required></input>
+                    <input type="password" name="password" required></input>
                     <label>Password</label>
                 </div>
                 <div className="remember-forgot">
@@ -50,15 +50,25 @@ function Login() {
 export default Login;
 
 export async function action({request}) {
-    const formData = request.formData();
-    const userData = Object.fromEntries(formData);
+    const data = await request.formData();
+    const userData = {
+        username: data.get('username'),
+        password: data.get('password')
+    };
 
-    await fetch('http://127.0.0.1:8000/api/login', {
+    const response = await fetch('http://localhost:8000/api/login/', {
         method: 'POST',
         body: JSON.stringify(userData),
         headers: {
             'Content-type': 'application/json'
         }
     });
-    return redirect('/home');
+    console.log(response);
+    console.log(response.ok);
+    console.log(response.data);
+    if (!response.ok) {
+        throw json({message: 'Invalid username or password!'}, {status: response.status});
+    } else {
+        return redirect('/home');
+    }
 }
