@@ -5,12 +5,12 @@ import CoursesList from "../components/CoursesList";
 
 
 function Home() {
-    
+    const username = localStorage.getItem('username');
     return (
         <>
         <Outlet />
         <main>
-            <CoursesList />
+            <CoursesList username={username} />
         </main>
         </>
     )

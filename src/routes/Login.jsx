@@ -69,6 +69,8 @@ export async function action({request}) {
     if (!response.ok) {
         throw json({message: 'Invalid username or password!'}, {status: response.status});
     } else {
+        // Store the username in localStorage
+        localStorage.setItem('username', userData.username);
         return redirect('/home');
     }
 }
