@@ -1,77 +1,81 @@
+import React, { useState } from 'react';
 import './App.css';
 import './Homepage.css';
-import './script.js';
-import React, { useState } from 'react';
-import login from './pages/login.js';
+import Login from './pages/login.js';
 import Register from './pages/register.js';
+import Courses from './pages/Courses.js';
 import { close } from 'ionicons/icons/index.js';
 import { IonIcon } from '@ionic/react';
-import axios from 'axios';
+import { useAuth } from './AuthContext';
+import Home from './pages/Home';
+
 function App() {
+  const { isLoggedIn, logout } = useAuth();
+
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [showCourses, setShowCourses] = useState(false);
 
-  const [showForm, setShowForm] = useState(false);
   const handleLoginButtonClick = () => {
     setShowLogin(true);
-    setShowForm(true);
-  };
-  const handletoggleregisterClick = () => {
-    setShowLogin(false);
-    setShowRegister(true);
-  };
-  const handletoggleloginClick = () => {
-    setShowLogin(true);
     setShowRegister(false);
+    setShowCourses(false);
   };
+
+  const handleCoursesButtonClick = () => {
+    setShowLogin(false);
+    setShowRegister(false);
+    setShowCourses(true);
+  };
+
   const handleCloseButtonClick = () => {
-    setShowForm(false);
+    setShowLogin(false);
+    setShowRegister(false);
+    setShowCourses(false);
   };
-  const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        password: ''
-      });
-    
-      const handleChange = (e) => {
-        setFormData({
-          ...formData,
-          [e.target.name]: e.target.value
-        });
-      };
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-          console.log(formData);
-          const response = await axios.post('http://127.0.0.1:8000/api/register', JSON.stringify(formData));
-          console.log(response.data); // Handle successful registration
-        } catch (error) {
-          console.error('Registration failed:', error.message); // Handle registration error
-        }
-      };
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <header>
         <h2 className="logo">Codecad</h2>
         <nav className="navigation">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Contact</a>
+          <a href="/">Home</a>
+          {isLoggedIn && <a href="#" onClick={handleCoursesButtonClick}>Courses</a>}
+          <a href="#">About</a>
+          <a href="#">Services</a>
+          <a href="#">Contact</a>
+          {isLoggedIn ? (
+            <>
+              <button className="btnlogin-popup" onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
             <button className="btnlogin-popup" onClick={handleLoginButtonClick}>Login</button>
-            
+          )}
         </nav>
       </header>
-      {showForm && (
-        <div className={showForm ? showLogin? "wrapper active-popup": "wrapper active-popup active" : "wrapper"}>
-        <span className="icon-close" onClick={handleCloseButtonClick}>
-          <IonIcon icon={close}></IonIcon></span>
-        <div className = "form-box login" > {showLogin ? login(handletoggleregisterClick) : null} </div>
-        <div className = "form-box register" > {showRegister ? Register(handletoggleloginClick, handleChange, handleSubmit) : null} </div>
-      </div>
+      {isLoggedIn && !showCourses && <Home />}
+      {!isLoggedIn && (showLogin || showRegister) && (
+        <div className="wrapper">
+          {showRegister && (
+            <div className="form-box login">
+              <Register handletoggleloginClick={handleLoginButtonClick} />
+            </div>
+          )}
+          {showLogin && (
+            <div className="form-box login">
+              <Login handletoggleregisterClick={handleCoursesButtonClick} />
+            </div>
+          )}
+          <span className="icon-close" onClick={handleCloseButtonClick}>
+            <IonIcon icon={close}></IonIcon>
+          </span>
+        </div>
       )}
-      
+      {isLoggedIn && showCourses && <Courses />}
     </div>
   );
 }
