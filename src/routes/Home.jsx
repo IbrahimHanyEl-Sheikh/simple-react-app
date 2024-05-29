@@ -16,9 +16,3 @@ function Home() {
     )
 }
 export default Home;
-
-// export async function loader() {
-//     const response = await fetch('http://localhost:8000/course_students/by_student/')
-//     const resData = await response.json();
-//     return resData.courses;
-// }

@@ -1,36 +1,11 @@
 import "../LoginRegister.css";
 import "../components/App.css";
-import {Link, Form, json, redirect} from 'react-router-dom';
+import {Link, Form, json} from 'react-router-dom';
 import { close, person, mail, lockClosed } from 'ionicons/icons/index.js';
 import { IonIcon } from '@ionic/react';
-// import axios from 'axios';
-// import { useState } from "react";
+
 
 function Register() {
-    // const [formData, setFormData] = useState({
-    //     username: '',
-    //     email: '',
-    //     password: ''
-    //   });  
-    
-    // const handleRegister = async (e) => {
-    //     e.preventDefault();
-    //     window.location.href = '/home';
-    //     // try {
-    //     //     setFormData({
-    //     //         ...formData,
-    //     //         [e.target.name]: e.target.value
-    //     //       });
-            
-    //     //     console.log(formData);
-    //     //     const response = await axios.post('http://127.0.0.1:8000/api/register', JSON.stringify(formData));
-    //     //     console.log(response.data); // Handle successful registration
-    //     //     return redirect('/home');
-    //     // } catch (error) {
-    //     //   console.error('Registration failed:', error.message); // Handle registration error
-    //     // }
-    //   };
-
       function handleCloseButtonClick() {
         window.location.href = '/';
     }
