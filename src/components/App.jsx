@@ -1,10 +1,14 @@
 // import { useState } from 'react';
 import "../LoginRegister.css";
 import "./App.css";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, redirect} from "react-router-dom";
 
 function App() {
         const location = useLocation();
+        const logoutHandler = () => {
+            localStorage.clear();
+            return redirect('/');
+        }
 
     return (
         <header className="header">
@@ -22,7 +26,7 @@ function App() {
                 )
             ||  (
                     location.pathname === "/home" && (
-                    <Link to="/" className="btnlogin-popup">
+                    <Link to="/" className="btnlogin-popup" onClick={logoutHandler}>
                         Logout
                     </Link>
                     )

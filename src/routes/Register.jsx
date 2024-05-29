@@ -104,6 +104,7 @@ export async function action({request}) {
             {status: response.status}
         );
     } else {
+        localStorage.setItem('username', eventData.username);
         window.location.href = '/home';
     }
 }
