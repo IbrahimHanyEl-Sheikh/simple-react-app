@@ -9,7 +9,7 @@ function CoursesList({ username }) {
     const [courses, setCourses] = useState([]);
     const fetchAllCourses = async () => {
         try {
-            const response = await fetch("http://localhost:8090/api/courses/")
+            const response = await fetch("http://localhost:8000/api/courses/")
             console.log(response);
             console.log(response.body);
             if (!response.ok) {
@@ -26,7 +26,7 @@ function CoursesList({ username }) {
     const fetchEnrolledCourses = async () => {
         const username = localStorage.getItem('username');
         try {
-            const response = await fetch(`http://localhost:8090/api/course_students/by_student?student_username=${username}`);
+            const response = await fetch(`http://localhost:8000/api/course_students/by_student?student_username=${username}`);
                 // params: {
                 //     student_username: username,
                 // },
@@ -61,7 +61,7 @@ function CoursesList({ username }) {
         if (!enrolledCourses.some(course => course.fields.name === selectedCourse)) {
             try {
                 const username = localStorage.getItem('username');
-                const response = await fetch('http://localhost:8090/api/course_students/', {
+                const response = await fetch('http://localhost:8000/api/course_students/', {
                     method: 'POST',
                     body: JSON.stringify({username: username, course:selectedCourse}),
                     headers: {
@@ -87,7 +87,7 @@ function CoursesList({ username }) {
     const handleDropCourse = async (courseName) => {
         try {
             const username = localStorage.getItem('username');
-            const response = await fetch('http://localhost:8090/api/course_students/drop/', {
+            const response = await fetch('http://localhost:8000/api/course_students/drop/', {
                 method: 'DELETE',
                 body: JSON.stringify({student_username: username, course: courseName}),
                 headers: {
@@ -138,7 +138,7 @@ export default CoursesList;
 
 export async function loader({params}) {
     const username = localStorage.getItem('username');
-    const response = await fetch(`http://localhost:8090/api/course_students/by_student/?username=${username}`);
+    const response = await fetch(`http://localhost:8000/api/course_students/by_student/?username=${username}`);
     if (response.ok){
         const data = await response.json();
         return data;
@@ -152,7 +152,7 @@ export async function action({request}) {
     const course = data.get('course');
     const username = localStorage.getItem('username');
 
-    const response = await fetch('http://localhost:8090/api/course_students/', {
+    const response = await fetch('http://localhost:8000/api/course_students/', {
         method: 'POST',
         body: JSON.stringify({username, course}),
         headers: {
