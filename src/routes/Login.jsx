@@ -56,7 +56,7 @@ export async function action({request}) {
         password: data.get('password')
     };
 
-    const response = await fetch('http://localhost:8000/api/login/', {
+    const response = await fetch('http://localhost:8090/api/login/', {
         method: 'POST',
         body: JSON.stringify(userData),
         headers: {
