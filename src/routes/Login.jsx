@@ -20,24 +20,24 @@ function Login() {
                     <span className="icon">
                         <IonIcon icon={person}></IonIcon>
                     </span>
-                    <input type="text" name="username" required></input>
+                    <input id="username" type="text" name="username" required></input>
                     <label>Username</label>
                 </div>
                 <div className="input-box">
                     <span className="icon">
                         <IonIcon icon={lockClosed}></IonIcon>
                         </span>
-                    <input type="password" name="password" required></input>
+                    <input id="password" type="password" name="password" required></input>
                     <label>Password</label>
                 </div>
                 <div className="remember-forgot">
                     <label><input type="checkbox"></input>Remember me</label>
                     <Link to="/register">Forgot Password?</Link>
                 </div>
-                <button type="submit" className="btn">Login</button>
+                <button id="Login" type="submit" className="btn">Login</button>
                 <div className="login-register">
                     <p>Don't have an account?
-                    <Link to="/register" className="register-link"> Register</Link>
+                    <Link id="register_redirect" to="/register" className="register-link"> Register</Link>
                     </p>
                 </div>
             </Form>

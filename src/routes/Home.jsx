@@ -10,7 +10,7 @@ function Home() {
         <>
         <Outlet />
         <main>
-            <CoursesList username={username} />
+            <CoursesList id="enrolledCourses" username={username} />
         </main>
         </>
     )

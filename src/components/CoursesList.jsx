@@ -106,17 +106,17 @@ function CoursesList({ username }) {
 
     return (
         <>
-        <div className="dropdown">
+        <div id="dropdown" className="dropdown">
+            
             <select onChange={(e) => handleCourseEnroll(e.target.value)}>
                 <option value="" disabled selected hidden>Select a course</option>
                 {courses.map((course) => (
-                  <option key={course.fields.id} value={course.fields.name}>{course.fields.name}</option>
+                  <option id={course.fields.name} key={course.fields.id} value={course.fields.name}>{course.fields.name}</option>
                 ))}
             </select>
-
         </div>
         {enrolledCourses.length > 0 && (
-            <ul className="courses">
+            <ul id="enrolledCourses" className="courses">
                 <li>
                     {enrolledCourses.map((course) => (
                         <Course key={course.fields.id} name={course.fields.name} onDrop={handleDropCourse}/>

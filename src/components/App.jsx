@@ -19,7 +19,7 @@ function App() {
             {
                 (
                         location.pathname === "/" && (
-                    <Link to="/login" className="btnlogin-popup">
+                    <Link id="Login_redirect" to="/login" className="btnlogin-popup">
                         Login
                     </Link>
                     )

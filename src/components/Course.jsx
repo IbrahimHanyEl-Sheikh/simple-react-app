@@ -7,7 +7,7 @@ function Course({name, onDrop}) {
     return (
         <div className="course">
                 <p className="name"> {name} </p>
-                <button className="drop-button" onClick={() => onDrop(name)}>
+                <button id={name+"_drop_button"} className="drop-button" onClick={() => onDrop(name)}>
                     <IonIcon icon={trashOutline}/>
                 </button>
         </div>

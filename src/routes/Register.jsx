@@ -22,28 +22,28 @@ function Register() {
                     <span className="icon">
                         <IonIcon icon={person}>
                         </IonIcon></span>
-                    <input type="text"  name='username' required></input>
+                    <input id="username" type="text"  name='username' required></input>
                     <label>Username</label>
                 </div>
                 <div className="input-box">
                     <span className="icon">
                         <IonIcon icon={mail}>
                         </IonIcon></span>
-                    <input type="email" name='email' required></input>
+                    <input id="email" type="email" name='email' required></input>
                     <label>Email</label>
                 </div>
                 <div className="input-box">
                     <span className="icon">
                         <IonIcon icon={lockClosed}>
                         </IonIcon></span>
-                    <input type="password" name='password' required></input>
+                    <input id="password" type="password" name='password' required></input>
                     <label>Password</label>
                 </div>
                 <div className="remember-forgot">
-                    <label><input type="checkbox" required></input>
+                    <label><input id="checkbox" type="checkbox" required></input>
                     I agree to the terms & conditions</label>
                 </div>
-                <button type="submit" className="btn">Register</button>
+                <button id="register" type="submit" className="btn">Register</button>
                 <div className="login-register">
                     <p>Already have an account?<Link
                     to="/login"
